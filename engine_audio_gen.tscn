@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5bdmgscfmbfk"]
+
+[ext_resource type="Script" path="res://engine_audio_gen.gd" id="1_mm1ax"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_0pa6m"]
+mix_rate = 22050.0
+buffer_length = 0.05
+
+[node name="EngineAudioGen" type="Node"]
+script = ExtResource("1_mm1ax")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_0pa6m")
+bus = &"CarEngine"
