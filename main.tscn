@@ -83,6 +83,26 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Max RPM"
 
+[node name="IdleRPM" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/IdleRPM"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Idle RPM"
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/IdleRPM"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 4000.0
+step = 10.0
+value = 750.0
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/IdleRPM"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Idle RPM"
+
 [node name="Inertia" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -147,6 +167,7 @@ script = ExtResource("2_fsvlp")
 
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/CylinderCount/HSlider" to="." method="_on_cylinder_count_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/MaxRPM/HSlider" to="." method="_on_max_rpm_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/IdleRPM/HSlider" to="." method="_on_idle_rpm_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Inertia/HSlider" to="." method="_on_inertia_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/EngineBrake/HSlider" to="." method="_on_engine_brake_changed"]
 [connection signal="resized" from="HBoxContainer/Graph" to="HBoxContainer/Graph" method="_on_resized"]

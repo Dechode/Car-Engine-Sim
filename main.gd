@@ -24,6 +24,8 @@ func _ready() -> void:
 	$HBoxContainer/VBoxContainer/MaxRPM/Label2.text = "%2.0f" % engine_params.max_rpm
 	$HBoxContainer/VBoxContainer/CylinderCount/Label2.text = "%d" % engine_params.cylinder_count
 	$HBoxContainer/VBoxContainer/CylinderCount/HSlider.value = engine_params.cylinder_count
+	$HBoxContainer/VBoxContainer/IdleRPM/Label2.text = "%2.2f" % engine_params.idle_rpm
+	$HBoxContainer/VBoxContainer/IdleRPM/HSlider.value = engine_params.idle_rpm
 
 	$EngineAudioGen.engine_params = engine_params
 	engine.engine_params.print_info()
@@ -83,4 +85,10 @@ func _on_engine_brake_changed(value: float) -> void:
 func _on_cylinder_count_changed(value: float) -> void:
 	engine.engine_params.cylinder_count = int(value)
 	$HBoxContainer/VBoxContainer/CylinderCount/Label2.text = "%d" % int(value)
+	update()
+
+
+func _on_idle_rpm_changed(value: float) -> void:
+	engine.engine_params.idle_rpm = value
+	$HBoxContainer/VBoxContainer/IdleRPM/Label2.text = "%2.2f" % value
 	update()
