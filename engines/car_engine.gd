@@ -19,9 +19,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	throttle = Input.get_action_strength("throttle")
-#	print(throttle)
-	var engine_brake_torque := rpm / engine_params.max_rpm * engine_params.engine_brake
-	torque = get_engine_torque(rpm, throttle) + reaction_torque - engine_brake_torque
+	
+	torque = get_engine_torque(rpm, throttle) + reaction_torque
+	
 	rpm += AV_2_RPM * delta * torque / engine_params.inertia
 	rpm = clampf(rpm, 0, 20000)
 	
@@ -29,12 +29,17 @@ func _process(delta: float) -> void:
 		torque = 0.0
 		rpm -= 500
 	
-#	print(torque)
-#	print(rpm)
+	if rpm < engine_params.idle_rpm:
+		reaction_torque = 0.25 * engine_params.max_torque
+	else:
+		reaction_torque = 0
 
 
 func get_engine_torque(p_rpm: float, throttle_input: float) -> float:
 	var rpm_mult := p_rpm / engine_params.max_rpm
-	return torque_curve.sample_baked(rpm_mult) * engine_params.max_torque * throttle_input
+	var engine_brake_torque := rpm_mult * engine_params.engine_brake
+	var t100 = torque_curve.sample_baked(rpm_mult) * engine_params.max_torque
+	var t0 := -engine_brake_torque
+	return lerpf(t0, t100, throttle_input)
 
 
