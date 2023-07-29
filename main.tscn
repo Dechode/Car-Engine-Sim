@@ -7,12 +7,13 @@
 
 [sub_resource type="Resource" id="Resource_ye4ei"]
 script = ExtResource("2_y0ife")
-cylinder_count = 10
-bore = 85.0
-stroke_ratio = 0.95
-max_bmep = 10.5
-max_rpm = 7000.0
-engine_brake = 80.0
+cylinder_count = 12
+bore = 78.0
+stroke_ratio = 1.14
+max_bmep = 14.0
+max_rpm = 6000.0
+idle_rpm = 900.0
+engine_brake = 100.0
 inertia = 0.25
 
 [sub_resource type="Curve" id="Curve_5spol"]
@@ -41,6 +42,26 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="CylinderCount" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/CylinderCount"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Cylinder Count"
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/CylinderCount"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 16.0
+value = 4.0
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/CylinderCount"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Max RPM"
 
 [node name="MaxRPM" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -124,6 +145,7 @@ script = ExtResource("2_fsvlp")
 
 [node name="EngineAudioGen" parent="." instance=ExtResource("4_wgv24")]
 
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/CylinderCount/HSlider" to="." method="_on_cylinder_count_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/MaxRPM/HSlider" to="." method="_on_max_rpm_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Inertia/HSlider" to="." method="_on_inertia_changed"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/EngineBrake/HSlider" to="." method="_on_engine_brake_changed"]

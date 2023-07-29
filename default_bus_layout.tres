@@ -1,8 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://crhh62vysgvc2"]
-
-[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_p0umb"]
-resource_name = "LowPassFilter"
-cutoff_hz = 340.0
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://crhh62vysgvc2"]
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_svrfj"]
 resource_name = "Delay"
@@ -11,6 +7,22 @@ tap2_delay_ms = 90.0
 feedback_delay_ms = 30.0
 feedback_lowpass = 1350.0
 
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_p0umb"]
+resource_name = "LowPassFilter"
+cutoff_hz = 340.0
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_w1cxq"]
+resource_name = "Distortion"
+pre_gain = 0.91
+drive = 0.15
+post_gain = 1.53
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_85flf"]
+resource_name = "Reverb"
+room_size = 0.0
+damping = 0.18
+spread = 0.46
+
 [resource]
 bus/1/name = &"CarEngine"
 bus/1/solo = false
@@ -18,7 +30,11 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = -3.76831
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_p0umb")
+bus/1/effect/0/effect = SubResource("AudioEffectDelay_svrfj")
 bus/1/effect/0/enabled = true
-bus/1/effect/1/effect = SubResource("AudioEffectDelay_svrfj")
+bus/1/effect/1/effect = SubResource("AudioEffectLowPassFilter_p0umb")
 bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("AudioEffectDistortion_w1cxq")
+bus/1/effect/2/enabled = true
+bus/1/effect/3/effect = SubResource("AudioEffectReverb_85flf")
+bus/1/effect/3/enabled = true
