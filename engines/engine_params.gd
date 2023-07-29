@@ -6,6 +6,7 @@ extends Resource
 @export var stroke_ratio := 0.95 # mm
 @export var max_bmep := 10.5 # Bar
 @export var max_rpm := 7000.0
+@export var idle_rpm := 900.0
 @export var engine_brake := 30.0
 @export var inertia := 0.2
 
@@ -28,12 +29,12 @@ func get_displacement() -> float:
 	return PI * pow(0.5 * bore, 2) * stroke_length * cylinder_count * 0.000001
 
 
-#func get_brake_power(t, _rpm) -> float:
-#	return 2 * PI * t * _rpm / 60000
-
-
 func get_torque_w_bmep(_bmep: float) -> float:
 	return (_bmep * displacement * 100) / (4 * PI)
+
+
+#func get_brake_power(t, _rpm) -> float:
+#	return 2 * PI * t * _rpm / 60000
 
 
 #func get_bmep(bp, _rpm) -> float:
