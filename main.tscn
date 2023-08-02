@@ -7,18 +7,18 @@
 
 [sub_resource type="Resource" id="Resource_ye4ei"]
 script = ExtResource("2_y0ife")
-cylinder_count = 12
+cylinder_count = 4
 bore = 78.0
-stroke_ratio = 1.14
-max_bmep = 14.0
+stroke_ratio = 0.95
+max_bmep = 10.5
 max_rpm = 6000.0
 idle_rpm = 900.0
-engine_brake = 100.0
+engine_brake = 60.0
 inertia = 0.25
 
 [sub_resource type="Curve" id="Curve_5spol"]
-_data = [Vector2(0, 0.526316), 0.0, 0.0, 0, 0, Vector2(0.563107, 1), 0.0, 0.0, 0, 0, Vector2(0.995146, 0.568421), -2.60211, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 4.87895, 0, 0, Vector2(0.160194, 0.4), 0.24782, 0.24782, 0, 0, Vector2(0.563107, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252632), -4.64661, 0.0, 0, 0]
+point_count = 4
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -61,7 +61,7 @@ value = 4.0
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/CylinderCount"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
-text = "Max RPM"
+text = "4"
 
 [node name="MaxRPM" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -141,22 +141,36 @@ text = "5.0"
 
 [node name="MaxTorque" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 10
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/MaxTorque"]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 text = "Max Torque"
 
-[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/MaxTorque"]
+[node name="Torque" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "200 N"
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Torque"]
+layout_mode = 2
+text = "Torque = "
 
 [node name="RPM" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/RPM"]
 layout_mode = 2
 text = "rpm = "
+
+[node name="Displacement" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Displacement"]
+layout_mode = 2
+text = "Displacement = "
 
 [node name="Graph" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2

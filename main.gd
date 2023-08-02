@@ -19,7 +19,7 @@ func _ready() -> void:
 	$HBoxContainer/VBoxContainer/Inertia/HSlider.value = engine_params.inertia
 	$HBoxContainer/VBoxContainer/EngineBrake/Label2.text = "%2.2f N" % engine_params.engine_brake
 	$HBoxContainer/VBoxContainer/EngineBrake/HSlider.value = engine_params.engine_brake
-	$HBoxContainer/VBoxContainer/MaxTorque/Label2.text = "%2.2f N" % engine_params.max_torque
+	$HBoxContainer/VBoxContainer/MaxTorque/Label.text = "Max Torque = %2.2f N" % engine_params.max_torque
 	$HBoxContainer/VBoxContainer/MaxRPM/HSlider.value = engine_params.max_rpm
 	$HBoxContainer/VBoxContainer/MaxRPM/Label2.text = "%2.0f" % engine_params.max_rpm
 	$HBoxContainer/VBoxContainer/CylinderCount/Label2.text = "%d" % engine_params.cylinder_count
@@ -33,13 +33,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$EngineAudioGen.rpm = engine.rpm
-	$HBoxContainer/VBoxContainer/RPM/Label.text = "rpm = %2.2f" % engine.rpm
+	$HBoxContainer/VBoxContainer/RPM/Label.text = "RPM = %2.2f" % engine.rpm
+	$HBoxContainer/VBoxContainer/Torque/Label.text = "Torque = %2.2f N" % engine.torque
 
 
 func update():
 	engine_params.update_params()
 	$EngineAudioGen.engine_params = engine_params
-	$HBoxContainer/VBoxContainer/MaxTorque/Label2.text = "%2.2f N" % engine_params.max_torque
+	$HBoxContainer/VBoxContainer/MaxTorque/Label.text = "Max Torque = %2.2f N" % engine_params.max_torque
+	$HBoxContainer/VBoxContainer/Displacement/Label.text = "Displacement = %2.2f l" % engine_params.displacement
 	update_graph()
 
 
