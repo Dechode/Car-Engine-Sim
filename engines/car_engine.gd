@@ -10,29 +10,28 @@ var throttle := 0.0
 var torque := 50.0
 var rpm := 900.0
 
-var reaction_torque := 0.0
+var reaction_torque := 0.0 # Set by Clutch when it gets implemented
+
+var rng := RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	engine_params.update_params()
+	rng.randomize()
 
 
 func _process(delta: float) -> void:
 	throttle = Input.get_action_strength("throttle")
 	
-	torque = get_engine_torque(rpm, throttle) + reaction_torque
+	torque = get_engine_torque(rpm, throttle)
 	
-	rpm += AV_2_RPM * delta * torque / engine_params.inertia
-	rpm = clampf(rpm, 0, 20000)
+	rpm += AV_2_RPM * delta * (torque + reaction_torque) / engine_params.inertia
+#	rpm = clampf(rpm + rng.randf() * 5.0, engine_params.idle_rpm, 20000)
+	rpm = clampf(rpm, engine_params.idle_rpm, 20000)
 	
-	if rpm > engine_params.max_rpm:
+	if rpm >= engine_params.max_rpm:
 		torque = 0.0
-		rpm -= 500
-	
-	if rpm < engine_params.idle_rpm:
-		reaction_torque = 0.25 * engine_params.max_torque
-	else:
-		reaction_torque = 0
+		rpm -= 1000.0
 
 
 func get_engine_torque(p_rpm: float, throttle_input: float) -> float:
